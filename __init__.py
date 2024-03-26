@@ -12,7 +12,7 @@ def MaPremiereAPI():
     return "<h2>La page contact d'Anas Mekkaoui</h2>"
 
 @app.route("/contactt/")
-def MaPremiereAPI():
+def MaPremiereAPI2():
      return render_template('contactt.html')
   
 @app.route('/')
@@ -31,6 +31,13 @@ def meteo():
         results.append({'Jour': dt_value, 'temp': temp_day_value})
     return jsonify(results=results)
 
+@app.route("/rapport/")
+def mongraphique():
+    return render_template("graphique.html")
+  
+@app.route("/histogramme/")
+def mongraphique2():
+    return render_template("histogramme.html")
   
 if __name__ == "__main__":
   app.run(debug=True)
