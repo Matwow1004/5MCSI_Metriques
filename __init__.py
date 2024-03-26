@@ -11,9 +11,6 @@ app = Flask(__name__)
 def MaPremiereAPI():
     return "<h2>La page contact d'Anas Mekkaoui</h2>"
 
-@app.route("/contactt/")
-def MaPremiereAPI2():
-     return render_template('contactt.html')
   
 @app.route('/')
 def hello_world():
