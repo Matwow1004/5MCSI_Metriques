@@ -1,4 +1,3 @@
-from flask import Flask, rendertemplatestring, rendertemplate, jsonify
 from flask import Flask, render_template_string, render_template, jsonify
 from flask import render_template
 from flask import json
@@ -11,6 +10,10 @@ app = Flask(__name__)
 @app.route("/contact/")
 def MaPremiereAPI():
     return "<h2>La page contact d'Anas Mekkaoui</h2>"
+
+@app.route("/contactt/")
+def MaPremiereAPI():
+     return render_template('contactt.html')
   
 @app.route('/')
 def hello_world():
