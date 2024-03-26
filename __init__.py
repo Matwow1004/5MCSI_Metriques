@@ -20,7 +20,20 @@ def MaPremiereAPI2():
 def hello_world():
     return render_template('hello.html')
 
-@app.route('/mygraphique.html/')
+from flask import Flask, render_template, jsonify
+import requests
+from datetime import datetime
+
+app = Flask(__name__)
+
+# GitHub API endpoint for fetching commits
+GITHUB_API_URL = "https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits"
+
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/commits/')
 def commits():
     commit_data = get_commit_data()
     return render_template('commits.html', commit_data=commit_data)
@@ -49,6 +62,7 @@ def extract_minutes(commit_data):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 @app.route('/tawarano/')
 def meteo():
