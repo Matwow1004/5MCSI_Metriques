@@ -33,37 +33,6 @@ GITHUB_API_URL = "https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits"
 def home():
     return render_template('home.html')
 
-@app.route('/commits/')
-def commits():
-    commit_data = get_commit_data()
-    return render_template('commits.html', commit_data=commit_data)
-
-def get_commit_data():
-    response = requests.get(GITHUB_API_URL)
-    if response.status_code == 200:
-        commit_data = response.json()
-        minutes_data = extract_minutes(commit_data)
-        return minutes_data
-    else:
-        return None
-
-def extract_minutes(commit_data):
-    minutes_data = {}
-    for commit in commit_data:
-        date_string = commit.get('commit', {}).get('author', {}).get('date')
-        if date_string:
-            date_object = datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ')
-            minutes = date_object.minute
-            if minutes in minutes_data:
-                minutes_data[minutes] += 1
-            else:
-                minutes_data[minutes] = 1
-    return minutes_data
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
 @app.route('/tawarano/')
 def meteo():
     response = urlopen('https://samples.openweathermap.org/data/2.5/forecast?lat=0&lon=0&appid=xxx')
@@ -83,6 +52,11 @@ def mongraphique():
 @app.route("/histogramme/")
 def mongraphique2():
     return render_template("histogramme.html")
+  
+@app.route("/commits/")
+def commit():
+    return render_template("commits.html")
+
   
 if __name__ == "__main__":
   app.run(debug=True)
